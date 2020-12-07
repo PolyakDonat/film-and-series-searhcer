@@ -14,11 +14,15 @@ export class AuthenticationGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.LOGIN_SERVICE.loginState.value.email === null) {
-      return this.ROUTER.parseUrl('/login');
-    } else {
-      return true;
-    }
+    let authReturnValue = undefined;
+    this.LOGIN_SERVICE.loginState.subscribe(credentials => {
+      if (credentials.email === null) {
+        authReturnValue = this.ROUTER.parseUrl('/login');
+      } else {
+        authReturnValue = true;
+      }
+    });
+    return authReturnValue;
   }
 
 }

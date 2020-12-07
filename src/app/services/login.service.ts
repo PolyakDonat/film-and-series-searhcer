@@ -17,15 +17,13 @@ export class LoginService {
 
   private updateState(_email: string) {
     this.loginState.next({
-      email: _email,
+      email: _email === 'null' ? null : _email,
       loggedIn: _email !== null
     })
   }
 
   manualLogin(email: string) {
-    if (!window.localStorage.getItem('FILM_AND_SERIES_SEARCHER_email')) {
-      window.localStorage.setItem('FILM_AND_SERIES_SEARCHER_email', email);
-    }
+    window.localStorage.setItem('FILM_AND_SERIES_SEARCHER_email', email);
     this.updateState(email);
     if (this.loginState.value.loggedIn) {
       this.ROUTER.navigateByUrl('/searcher');
@@ -34,13 +32,17 @@ export class LoginService {
 
   autoLogin() {
     const emailFromLocalStorage = window.localStorage.getItem('FILM_AND_SERIES_SEARCHER_email');
-    if (emailFromLocalStorage) {
+    if (emailFromLocalStorage !== 'null') {
       this.updateState(emailFromLocalStorage);
-    } else {
-      this.updateState(null)
     }
     if (this.loginState.value.loggedIn) {
       this.ROUTER.navigateByUrl('/searcher');
     }
+  }
+
+  logout() {
+    this.updateState(null);
+    window.localStorage.setItem('FILM_AND_SERIES_SEARCHER_email', null);
+    this.ROUTER.navigateByUrl('/login');
   }
 }

@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { OpeningComponent } from './pages/opening/opening.component';
 import {LoginService} from "./services/login.service";
 import { SearcherComponent } from './pages/searcher/searcher.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OpeningComponent,
-    SearcherComponent
+    SearcherComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
