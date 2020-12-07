@@ -1,0 +1,26 @@
+<section id="login">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-field">
+      <label for="email"><b>Email</b></label>
+      <input formControlName="email" id="email" name="email" type="email">
+      <span *ngFor="let inputError of EmailWithError.errors"
+            class="error"
+            [ngStyle]="{display: inputError.validation ? 'block' : 'none'}">
+            {{inputError.message}}
+      </span>
+    </div>
+    <div class="form-field">
+      <label for="password"><b>Jelszó</b></label>
+      <input formControlName="password" id="password" name="password" type="password">
+      <span *ngFor="let inputError of PasswordWithError.errors"
+            class="error"
+            [ngStyle]="{display: inputError.validation ? 'block' : 'none'}">
+            {{inputError.message}}
+      </span>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">
+      <b>Bejelentkezés</b>
+    </button>
+  </form>
+</section>
+
