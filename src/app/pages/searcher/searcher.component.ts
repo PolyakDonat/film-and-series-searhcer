@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'film-and-series-searcher',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearcherComponent implements OnInit {
 
-  constructor() { }
+  searchControl: FormControl;
+
+  constructor(private FORM_BUILDER: FormBuilder) { }
 
   ngOnInit(): void {
+    this.searchControl = this.FORM_BUILDER.control(
+      '',
+      []
+    )
+  }
+
+  get SearchControlValue() {
+    return this.searchControl.value;
+  }
+
+  resetSearch() {
+    this.searchControl.patchValue('');
   }
 
 }

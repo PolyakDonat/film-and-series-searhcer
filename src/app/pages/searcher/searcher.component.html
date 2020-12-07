@@ -1,1 +1,11 @@
-<p>searcher works!</p>
+<section id="search_field">
+  <label for="search">Search: </label>
+  <div class="form-helper">
+    <input [formControl]="searchControl" id="search" type="text">
+    <span class="suffix"
+          *ngIf="SearchControlValue.length > 0"
+          (click)="resetSearch()"
+    ><span class="material-icon">highlight_off</span></span>
+  </div>
+
+</section>

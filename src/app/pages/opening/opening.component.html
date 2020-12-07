@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="form-field">
-      <label for="password"><b>Jelszó</b></label>
+      <label for="password"><b>Password</b></label>
       <input formControlName="password" id="password" name="password" type="password">
       <span *ngFor="let inputError of PasswordWithError.errors"
             class="error"
@@ -19,7 +19,7 @@
       </span>
     </div>
     <button type="submit" [disabled]="loginForm.invalid">
-      <b>Bejelentkezés</b>
+      <b>Login</b>
     </button>
   </form>
 </section>
