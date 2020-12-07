@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IInputWithError} from "./interfaces/IInputWithError";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'film-and-series-opening',
@@ -11,9 +12,10 @@ export class OpeningComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private FORM_BUILDER: FormBuilder) { }
+  constructor(private FORM_BUILDER: FormBuilder, private LOGIN_SERVICE: LoginService) { }
 
   ngOnInit(): void {
+    this.LOGIN_SERVICE.autoLogin();
     this.loginForm = this.FORM_BUILDER.group({
       email: this.FORM_BUILDER.control(
         null,
@@ -69,7 +71,7 @@ export class OpeningComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm);
+    this.LOGIN_SERVICE.manualLogin(this.EmailWithError.control.value);
   }
 
 }
